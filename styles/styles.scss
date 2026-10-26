@@ -1,29 +1,50 @@
 body {
-	background-color: #dddddd;
+	background-color: #ffffff;
+	display: flex;
+	align-items: center;
+	height: 100vh;
+	font-family: "Arimo";
+	font-size: 35px;
 }
 
 .board {
-	background-color: #000000;
+	margin: 0 auto;
 	padding: 4px;
+	background-color: #8b8b8b;
 	width: fit-content;
+
 	&__row {
 		display: flex;
-		gap: 2px;
-		margin-bottom: 2px;
+		gap: 1px;
+		margin-bottom: 1px;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&:nth-child(3n):not(:last-child) {
+			margin-bottom: 3px;
+		}
 	}
 
 	&__cell {
-
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: #e0fff2;
+		background-color: #ffffff;
 		width: 60px;
 		aspect-ratio: 1/1;
-		cursor: pointer;
 		transition: background-color 0.2s ease;
-		&:active {
-			background-color: #a5bdb3;
+
+		&:nth-child(3n):not(:last-child) {
+			margin-right: 2px;
 		}
 	}
+
+	&__cell--selected {
+		background-color: #efe6ff;
+
+	}
 }
+
+

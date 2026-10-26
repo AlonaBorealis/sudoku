@@ -5,6 +5,7 @@ const board = document.querySelector(".board");
 const originalPuzzle =
 	"530070000600195000098000060800060003400803001700020006060000280000419005000080079";
 
+
 /*функция преобразовывает строку в массив и делаем из цифр объекты, со значениями value,
  isFixed, notes.*/
 const createCellsFromPuzzle = (puzzle) => {
@@ -35,15 +36,16 @@ const parsePuzzle = (puzzle) => {
 	return chunkIntoRows(createCellsFromPuzzle(puzzle));
 };
 
-/*очищаем контейнер с доской, чтобы избежать дублирования.*/
+/*функция для очистки контейнера с доской, чтобы избежать дублирования.*/
 const cleanBoard = () => {
-	document.querySelector(".board").innerHTML = "";
+	board.innerHTML = "";
 };
-
-cleanBoard();
 
 /*функция отвечает за отрисовку нашей судоку.*/
 const createBoard = (puzzle) => {
+
+	/*вызываем функцию, чтобы очистить предыдущие доски*/
+	cleanBoard();
 
 	/*цикл начинает идти по строкам и создает отдельные контейнеры под каждую строку.*/
 	for (let i = 0; i < puzzle.length; i++) {
@@ -76,6 +78,12 @@ const createBoard = (puzzle) => {
 			item.classList.add("board__cell");
 			item.setAttribute("role", "gridcell");
 			group.appendChild(item);
+			/*получаем данные из обработчика событий, который слушает клики, и проверяем
+			существует ли кнопка на которую нажали, а дальше смотрим какая это кнопка по ее
+			координатам и присваиваем ей модификатор selected*/
+			if (selectedCell && i === selectedCell.row && j === selectedCell.col) {
+				item.classList.add("board__cell--selected");
+			}
 		}
 	}
 
@@ -84,7 +92,48 @@ const createBoard = (puzzle) => {
 };
 
 
-console.log(createBoard(parsePuzzle(originalPuzzle)));
+const boardState = parsePuzzle(originalPuzzle);
 
+let selectedCell = null;
+
+board.addEventListener("click", (event) => {
+	if (event.target.classList.contains("board__cell")) {
+		selectedCell = {
+			row: Number(event.target.dataset.row),
+			col: Number(event.target.dataset.col),
+		};
+		createBoard(boardState);
+	}
+
+});
+
+
+createBoard(boardState);
+
+
+document.addEventListener("keydown", (event) => {
+		const digit = Number(event.key);
+		const key = event.key;
+		if (!selectedCell) {
+			return;
+		}
+
+		const cell = boardState[selectedCell.row][selectedCell.col];
+
+		if (!cell.isFixed) {
+
+			if (digit >= 1 && digit <= 9) {
+				cell.value = digit;
+			} else if (key === "Backspace" || key === "Delete") {
+				cell.value = null;
+			}
+			createBoard(boardState);
+
+		}
+
+	},
+);
+
+console.log(boardState);
 
 
