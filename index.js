@@ -98,18 +98,82 @@ let selectedCell = null;
 
 board.addEventListener("click", (event) => {
 	if (event.target.classList.contains("board__cell")) {
+
 		selectedCell = {
 			row: Number(event.target.dataset.row),
 			col: Number(event.target.dataset.col),
 		};
+
 		createBoard(boardState);
 	}
 
 });
 
+const hasDuplicateInRow = (row, col) => {
+	const cellValue = boardState[row][col].value;
+	console.log(cellValue + " <- cell to check");
 
-createBoard(boardState);
+	/*делаем проверку пустая ли клетка, если да, то сразу выходим с функции - нам тут
+	 проверять нечего*/
+	if (cellValue === null) {
+		return false;
+	}
+	/*идем по нашей строке*/
+	for (let i = 0; i < boardState[row].length; i++) {
 
+
+		/*если мы наступим на проверяемую клетку, то мы ее пропустим*/
+		if (col !== i) {
+
+			if (boardState[row][i].value === cellValue) {
+				return true;
+			}
+		}
+	}
+	return false;
+};
+
+const hasDuplicateInCol = (row, col) => {
+	const cellValue = boardState[row][col].value;
+	console.log(cellValue + " <- cell to check");
+
+	/*делаем проверку пустая ли клетка, если да, то сразу выходим с функции - нам тут
+	 проверять нечего*/
+	if (cellValue === null) {
+		return false;
+	}
+	/*идем по нашему столбцу*/
+	for (let i = 0; i < boardState.length; i++) {
+
+
+		/*если мы наступим на проверяемую клетку, то мы ее пропустим*/
+		if (row !== i) {
+
+			if (boardState[i][col].value === cellValue) {
+				return true;
+			}
+		}
+	}
+	return false;
+};
+
+const hasDuplicateInBlock = (row, col) => {
+	const cellValue = boardState[row][col].value;
+
+	/*if (cellValue === null) {
+		return false;
+	}*/
+
+	const rowNumber = Math.trunc(row / 3);
+	const colNumber = Math.trunc(col / 3);
+
+	const firstCellRow = rowNumber * 3;
+	const firstCellCol = colNumber * 3;
+
+	console.log(rowNumber, colNumber, firstCellRow, firstCellCol);
+};
+
+console.log(hasDuplicateInBlock(4, 7));
 
 document.addEventListener("keydown", (event) => {
 		const digit = Number(event.key);
@@ -131,9 +195,12 @@ document.addEventListener("keydown", (event) => {
 
 		}
 
+		console.log(hasDuplicateInRow(selectedCell.row, selectedCell.col));
+		console.log(hasDuplicateInCol(selectedCell.row, selectedCell.col));
+
 	},
 );
 
-console.log(boardState);
+createBoard(boardState);
 
 
