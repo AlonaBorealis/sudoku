@@ -1,0 +1,8 @@
+node_modules/
+dist/
+
+# IDE
+.idea/
+
+# локальные инструкции для ассистента
+CLAUDE.md
