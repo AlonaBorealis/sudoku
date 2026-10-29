@@ -41,10 +41,19 @@ body {
 		}
 	}
 
+	&__cell--duplicate {
+		background-color: #f7cfd7;
+	}
+
 	&__cell--selected {
 		background-color: #efe6ff;
 
 	}
+
+	&__cell--duplicate-not-fixed{
+		color: #e24c55;
+	}
+
 }
 
 
