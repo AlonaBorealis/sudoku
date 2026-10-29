@@ -78,12 +78,21 @@ const createBoard = (puzzle) => {
 			item.classList.add("board__cell");
 			item.setAttribute("role", "gridcell");
 			group.appendChild(item);
+
 			/*получаем данные из обработчика событий, который слушает клики, и проверяем
 			существует ли кнопка на которую нажали, а дальше смотрим какая это кнопка по ее
 			координатам и присваиваем ей модификатор selected*/
 			if (selectedCell && i === selectedCell.row && j === selectedCell.col) {
 				item.classList.add("board__cell--selected");
 			}
+
+			if (hasDuplicate(i, j)) {
+				item.classList.add("board__cell--duplicate")
+				if (!puzzle[i][j].isFixed) {
+					item.classList.add("board__cell--duplicate-not-fixed")
+				}
+			}
+
 		}
 	}
 
@@ -111,7 +120,6 @@ board.addEventListener("click", (event) => {
 
 const hasDuplicateInRow = (row, col) => {
 	const cellValue = boardState[row][col].value;
-	console.log(cellValue + " <- cell to check");
 
 	/*делаем проверку пустая ли клетка, если да, то сразу выходим с функции - нам тут
 	 проверять нечего*/
@@ -120,7 +128,6 @@ const hasDuplicateInRow = (row, col) => {
 	}
 	/*идем по нашей строке*/
 	for (let i = 0; i < boardState[row].length; i++) {
-
 
 		/*если мы наступим на проверяемую клетку, то мы ее пропустим*/
 		if (col !== i) {
@@ -135,7 +142,6 @@ const hasDuplicateInRow = (row, col) => {
 
 const hasDuplicateInCol = (row, col) => {
 	const cellValue = boardState[row][col].value;
-	console.log(cellValue + " <- cell to check");
 
 	/*делаем проверку пустая ли клетка, если да, то сразу выходим с функции - нам тут
 	 проверять нечего*/
@@ -144,7 +150,6 @@ const hasDuplicateInCol = (row, col) => {
 	}
 	/*идем по нашему столбцу*/
 	for (let i = 0; i < boardState.length; i++) {
-
 
 		/*если мы наступим на проверяемую клетку, то мы ее пропустим*/
 		if (row !== i) {
@@ -160,9 +165,9 @@ const hasDuplicateInCol = (row, col) => {
 const hasDuplicateInBlock = (row, col) => {
 	const cellValue = boardState[row][col].value;
 
-	/*if (cellValue === null) {
+	if (cellValue === null) {
 		return false;
-	}*/
+	}
 
 	const rowNumber = Math.trunc(row / 3);
 	const colNumber = Math.trunc(col / 3);
@@ -170,10 +175,19 @@ const hasDuplicateInBlock = (row, col) => {
 	const firstCellRow = rowNumber * 3;
 	const firstCellCol = colNumber * 3;
 
-	console.log(rowNumber, colNumber, firstCellRow, firstCellCol);
+	for (let i = firstCellRow; i < firstCellRow + 3; i++) {
+		for (let j = firstCellCol; j < firstCellCol + 3; j++) {
+
+			if (i !== row || j !== col)
+				if (boardState[i][j].value === cellValue) {
+					return true;
+				}
+		}
+	}
+	return false;
 };
 
-console.log(hasDuplicateInBlock(4, 7));
+const hasDuplicate = (row, col) => hasDuplicateInRow(row, col) || hasDuplicateInCol(row, col) || hasDuplicateInBlock(row, col);
 
 document.addEventListener("keydown", (event) => {
 		const digit = Number(event.key);
@@ -194,10 +208,6 @@ document.addEventListener("keydown", (event) => {
 			createBoard(boardState);
 
 		}
-
-		console.log(hasDuplicateInRow(selectedCell.row, selectedCell.col));
-		console.log(hasDuplicateInCol(selectedCell.row, selectedCell.col));
-
 	},
 );
 
