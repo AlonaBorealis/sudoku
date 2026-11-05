@@ -35,24 +35,31 @@ body {
 		width: 60px;
 		aspect-ratio: 1/1;
 		transition: background-color 0.2s ease;
-
+		cursor: pointer;
 		&:nth-child(3n):not(:last-child) {
 			margin-right: 2px;
 		}
 	}
 
+
+
+	&__cell--colored-by-selection {
+		background-color: #f8f4ff;
+
+	}
+
 	&__cell--duplicate {
 		background-color: #f7cfd7;
-	}
+	}&__cell--selected {
+		 background-color: #dbc7ff;
 
-	&__cell--selected {
-		background-color: #efe6ff;
-
-	}
-
+	 }
 	&__cell--duplicate-not-fixed{
 		color: #e24c55;
 	}
+
+
+
 
 }
 
