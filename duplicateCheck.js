@@ -1,4 +1,5 @@
 import {boardState} from "./boardState.js";
+import {countBlockNumber} from "./countBlockNumber.js";
 
 const hasDuplicateInRow = (row, col) => {
 	const cellValue = boardState[row][col].value;
@@ -42,18 +43,6 @@ const hasDuplicateInCol = (row, col) => {
 		}
 	}
 	return false;
-};
-
-
-export const countBlockNumber = (row, col) => {
-
-	const rowNumber = Math.trunc(row / 3);
-	const colNumber = Math.trunc(col / 3);
-
-	return {
-		rowNumber: rowNumber,
-		colNumber: colNumber,
-	};
 };
 
 const hasDuplicateInBlock = (row, col, blockNumber) => {

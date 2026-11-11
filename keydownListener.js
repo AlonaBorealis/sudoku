@@ -1,6 +1,7 @@
 import {selectedCell} from "./selectedCell.js";
 import {boardState} from "./boardState.js";
 import {createBoard} from "./createSudokuBoard.js";
+import {winChecker} from "./winCheck.js";
 
 document.addEventListener("keydown", (event) => {
 		const digit = Number(event.key);
@@ -18,8 +19,11 @@ document.addEventListener("keydown", (event) => {
 			} else if (key === "Backspace" || key === "Delete") {
 				cell.value = null;
 			}
+
 			createBoard(boardState, selectedCell);
 
 		}
+	console.log(winChecker(boardState))
 	},
+
 );

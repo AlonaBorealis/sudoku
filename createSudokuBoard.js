@@ -1,4 +1,5 @@
-import {countBlockNumber, hasDuplicate} from "./duplicateCheck.js";
+import {hasDuplicate} from "./duplicateCheck.js";
+import {isColoredBySelection, isColoredSameNumbers} from "./coloredBySelection.js";
 
 export const board = document.querySelector(".board");
 
@@ -52,20 +53,25 @@ export const createBoard = (puzzle, selectedCell) => {
 				item.classList.add("board__cell--selected");
 			}
 
-			if (selectedCell && (i === selectedCell.row || j === selectedCell.col || (countBlockNumber(i, j).rowNumber === countBlockNumber(selectedCell.row, selectedCell.col).rowNumber && countBlockNumber(i,j).colNumber === countBlockNumber(selectedCell.row, selectedCell.col).colNumber))) {
+			if (isColoredBySelection(i, j, selectedCell)) {
 				item.classList.add("board__cell--colored-by-selection");
+			}
+
+			if (isColoredSameNumbers(i, j, selectedCell)) {
+				item.classList.add("board__cell--colored-same-numbers")
 			}
 
 			if (hasDuplicate(i, j)) {
 				item.classList.add("board__cell--duplicate");
 				if (!puzzle[i][j].isFixed) {
-					item.classList.add("board__cell--duplicate-not-fixed");
+					item.classList.add("board__cell--duplicate-editable-by-user");
 				}
 			}
 
+
 		}
 	}
-
 	/*возвращаем отрисованную доску.*/
 	return board;
 };
+

@@ -4,7 +4,6 @@ import {createBoard} from "./createSudokuBoard.js";
 import {selectedCell} from "./selectedCell.js";
 import "./keydownListener.js"
 
-
 createBoard(boardState, selectedCell);
 
 
