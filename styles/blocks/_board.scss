@@ -1,14 +1,4 @@
-body {
-	background-color: #ffffff;
-	display: flex;
-	align-items: center;
-	height: 100vh;
-	font-family: "Arimo";
-	font-size: 35px;
-}
-
 .board {
-	margin: 0 auto;
 	padding: 4px;
 	background-color: #606060;
 	width: fit-content;
@@ -47,6 +37,7 @@ body {
 		background-color: #f8f4ff;
 
 	}
+
 	&__cell--colored-same-numbers {
 		background-color: #dbc7ff;
 	}
@@ -65,5 +56,3 @@ body {
 
 
 }
-
-

@@ -67,8 +67,6 @@ export const createBoard = (puzzle, selectedCell) => {
 					item.classList.add("board__cell--duplicate-editable-by-user");
 				}
 			}
-
-
 		}
 	}
 	/*возвращаем отрисованную доску.*/

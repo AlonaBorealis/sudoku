@@ -1,16 +1,15 @@
 import {hasDuplicate} from "./duplicateCheck.js";
-import {boardState} from "./boardState.js";
 
 export const winChecker = (puzzle) => {
 	for (let i = 0; i < puzzle.length; i++) {
 		for (let j = 0; j < puzzle[i].length; j++) {
 			if (puzzle[i][j].value === null) {
-				return false
+				return false;
 			}
 			if (hasDuplicate(i, j)) {
 				return false;
 			}
 		}
 	}
-	return true
-}
+	return true;
+};

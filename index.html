@@ -12,14 +12,25 @@
 			rel="stylesheet">
 	</head>
 	<body>
-		<div class="board" role="grid">
-			<div class="board__row" role="row">
+		<div class="board-wrap">
+			<div class="win-announce">
+				<h2 class="win-announce__win-text">Победа!</h2>
+				<p class="win-announce__time-text">Время: 1:20</p>
+				<div class="win-announce__buttons">
+					<button class="win-announce__new-game-button btn">Новая игра</button>
+					<button class="win-announce__back-to-board-button btn">Вернуться к
+					                                                       доске</button>
+				</div>
+			</div>
+			<div class="board" role="grid">
+				<div class="board__row" role="row">
 				<span aria-readonly="true"
 				      data-row="0"
 				      data-col="0"
 				      class="board__cell"
 				      role="gridcell"
 				>5</span>
+				</div>
 			</div>
 		</div>
 	</body>
