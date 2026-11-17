@@ -1,14 +1,21 @@
 import {selectedCell} from "./selectedCell.js";
 import {boardState} from "./boardState.js";
-import {createBoard} from "./createSudokuBoard.js";
+import { createBoard} from "./createSudokuBoard.js";
 import {winChecker} from "./winCheck.js";
+import {showWinScreen} from "./winScreenHandler.js";
+
 
 document.addEventListener("keydown", (event) => {
+		if (winChecker(boardState)) {
+			return;
+		}
+
 		const digit = Number(event.key);
 		const key = event.key;
 		if (!selectedCell) {
 			return;
 		}
+
 
 		const cell = boardState[selectedCell.row][selectedCell.col];
 
@@ -23,7 +30,6 @@ document.addEventListener("keydown", (event) => {
 			createBoard(boardState, selectedCell);
 
 		}
-	console.log(winChecker(boardState))
+		showWinScreen(winChecker(boardState));
 	},
-
 );

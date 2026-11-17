@@ -1,10 +1,11 @@
+@import "variables";
 @import "reset.scss";
 @import "core";
-@import "variables";
 
 @import "./blocks/board-wrap";
 @import "./blocks/board";
-@import "./blocks/win-announce";
+@import "blocks/win-screen";
+@import "blocks/numbers";
 
 
 

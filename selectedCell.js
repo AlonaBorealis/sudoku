@@ -13,5 +13,8 @@ board.addEventListener("click", (event) => {
 
 		createBoard(boardState, selectedCell);
 	}
-
 });
+
+export const clearSelectedCell = () => {
+	selectedCell = null
+}

@@ -1,4 +1,8 @@
-const originalPuzzle =
+import {createBoard} from "./createSudokuBoard.js";
+import {selectedCell} from "./selectedCell.js";
+
+
+export const originalPuzzle =
 	"530070000600195000098000060800060003400803001700020006060000280000419005000080079";
 
 
@@ -28,8 +32,15 @@ const chunkIntoRows = (arr) => {
 
 /*функция объединяет в себе преобразование цифр в объекты и разбивание массива на 9
  массивов строк, сделано для удобства, чтобы можно было сделать преобразование одним вызовом.*/
-const parsePuzzle = (puzzle) => {
+export const parsePuzzle = (puzzle) => {
 	return chunkIntoRows(createCellsFromPuzzle(puzzle));
 };
 
-export const boardState = parsePuzzle(originalPuzzle);
+export let boardState = parsePuzzle(originalPuzzle);
+
+
+export const clearBoardForNewGame = () => {
+	boardState = parsePuzzle(originalPuzzle);
+	createBoard(boardState, selectedCell)
+}
+

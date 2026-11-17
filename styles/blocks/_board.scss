@@ -1,3 +1,5 @@
+@use "../_variables.scss" as v;
+
 .board {
 	padding: 4px;
 	background-color: #606060;
@@ -34,24 +36,24 @@
 
 
 	&__cell--colored-by-selection {
-		background-color: #f8f4ff;
+		background-color: v.$light-purple;
 
 	}
 
 	&__cell--colored-same-numbers {
-		background-color: #dbc7ff;
+		background-color: v.$dark-purple;
 	}
 
 	&__cell--duplicate {
-		background-color: #f7cfd7;
+		background-color: v.$light-red;
 	}
 
 	&__cell--selected {
-		background-color: #dbc7ff;
+		background-color: v.$dark-purple;
 	}
 
 	&__cell--duplicate-editable-by-user {
-		color: #e24c55;
+		color: v.$dark-red;
 	}
 
 

@@ -13,3 +13,5 @@ export const winChecker = (puzzle) => {
 	}
 	return true;
 };
+
+
